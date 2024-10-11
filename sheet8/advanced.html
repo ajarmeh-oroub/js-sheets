@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>My Shopping List</h1>
+    <label style="font-weight: bold;"> Enter a new item :  </label>
+    <input type="text" id="main" placeholder="newitem">
+    <button type="submit" onclick="add()">Add Item</button>
+    <ul id="list">
+
+    </ul>
+
+
+    <script>
+        document.getElementById('main').focus()
+
+        var count = localStorage.getItem('itemCount') ? parseInt(localStorage.getItem('itemCount')) : 0; 
+        function  add(){
+            count++
+            var item= document.getElementById('main').value
+
+            localStorage.setItem(count, JSON.stringify(item))
+            localStorage.setItem('itemCount', count);
+
+var mylist= document.getElementById('list')
+
+ var item =localStorage.getItem(count)
+ var myli= document.createElement('li')
+ myli.innerText= JSON.parse(item)
+
+ var mybutton = document.createElement('button');
+    mybutton.innerText = 'Delete';
+    mybutton.onclick = function() {
+        deleteItem(count, myli);
+    };
+ myli.appendChild(mybutton)
+ mylist.appendChild(myli)
+
+ document.getElementById('main').value = '';
+ document.getElementById('main').focus()
+        }
+
+        function deleteItem(key, item){
+  localStorage.removeItem(key)
+  item.remove();
+  document.getElementById('main').focus()
+        }
+    </script>
+</body>
+</html>

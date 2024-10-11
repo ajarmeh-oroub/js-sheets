@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+        }
+        .contai{
+          padding: 10px;
+            height: fit-content;
+            width: 500px;
+            border: solid blue 3px ;
+        }
+        h1{
+            color: blue;
+        }
+        .btn{
+            margin-left: 45px;
+        }
+        .result{
+            display: none;
+        }
+        .divs{
+            color: black;
+            font-size:medium;
+        }
+        .table{
+            display: none;
+      
+        }
+
+        th ,tr , td {
+            margin: 15px  50px;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+    
+<div class="contai">
+<h1>Use A Test Score Array</h1>
+<label>Name:</label>
+<input type="text" placeholder="enter name" id="name">
+<br>
+<br>
+<label>Score:</label>
+<input type="text" placeholder="enter score" id="score">
+<br>
+<div class="btn">
+    <br>
+<button onclick="add()">Add</button>
+<button onclick="displayR()">Dispaly Results</button>
+<button onclick="displayS()">Display Scores</button>
+</div>
+<h1 class="result" id="result">Results</h1>
+<br>
+<h1 class="result" id="scoret">Scores</h1>
+<br>
+<table class="table" id="table" >
+    <th>Names</th>
+    <th>score</th>
+</table>
+
+
+
+</div>
+
+
+    <script>
+        var names=[]
+        var scores= {}
+
+        
+function add(){
+var name = document.getElementById('name').value
+var score= document.getElementById('score').value
+names.push(name)
+scores[name]=parseInt(score)
+console.log(names  );
+console.log(scores);
+document.getElementById('name').value = '';
+        document.getElementById('score').value = '';
+
+}
+
+function displayR(){
+var result =document.getElementById('result')
+result.style.display="inline-block"
+
+var sum=0
+
+var max= 0
+var highkey=''
+for(const key in scores) {
+    sum+=scores[key]
+    if(max<scores[key]){
+        max=scores[key]
+        highkey=key
+    }
+    
+};
+
+var avg = sum/Object.keys(scores).length
+
+var mydiv = document.createElement('div')
+mydiv.classList.add('divs')
+mydiv.innerHTML=`average score  = ${avg}`
+
+
+var mydiv2=document.createElement('div')
+mydiv2.classList.add('divs')
+mydiv2.innerHTML=`High score = ${highkey}  with a score of ${max}`
+
+
+
+
+
+result.append(mydiv)
+result.append(mydiv2)
+
+
+}
+
+
+function displayS(){
+
+    document.getElementById('scoret').style.display='inline-block'
+var mytable= document.getElementById('table')
+mytable.style.display='inline-block'
+    for(const key in scores) {
+var mydiv= document.createElement('tr')
+mydiv.innerHTML=`<td>${key}</td>
+<td>${scores[key]}</td>`
+  
+   mytable.append(mydiv)
+    }
+
+    
+};
+
+
+    </script>
+</body>
+</html>

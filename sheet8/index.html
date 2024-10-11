@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .error1 , .erorr2{
+      
+        font-size: small;
+        color: red;
+      }
+      .erorr2{
+        display: none;
+      }
+
+    </style>
+  </head>
+  <body>
+    <form id="frm">
+      <label for="name"> UserName</label>
+      <input type="text" name="name" id="user" placeholder="userName" required />
+      <br>
+      <span class="error1" id="error1">somthing is wrong </span>
+
+      <br />
+      <label for="pass">Password</label>
+      <input
+        type="password"
+        name="pass"
+        id="pass"
+        placeholder="password"
+        required
+      />
+      <br>
+      <span class="erorr2" id="error2">somthing is wrong</span>
+     
+      <br />
+
+      <label for="conPass">Confirm Password</label>
+      <input
+        type="password"
+        name="conPass"
+        id="conPass"
+        placeholder="Confirm your Password"
+        required
+      />
+     
+      <br />
+      <button onclick="check()" id="button">Submit</button>
+    </form>
+
+    <script>
+      
+         document.getElementById("frm").addEventListener('input', (event) => {
+   
+        var pass = document.getElementById("pass").value.trim();
+        var conPass = document.getElementById("conPass").value.trim();
+        var user = document.getElementById("user").value.trim();
+        var btn = document.getElementById("button");
+
+  
+        if (user !== "" && pass !== "" && pass === conPass) {
+   
+          btn.disabled = false;
+        } else {
+      
+          btn.disabled = true;
+
+        
+          if (user === "") {
+            document.getElementById('error1').style.display="inline"
+            // window.alert("Username is empty");
+          } else if (pass !== conPass) {
+            // window.alert("Passwords do not match");
+            document.getElementById('error2').style.display="inline"
+          }else{
+            document.getElementById('error1').style.display="none"
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
